@@ -3,7 +3,8 @@
 **/
 var React = require('react');
 var Navigation = require('./Navigation.js');
-var Feed = require('./Feed');
+var Feed = require('./Feed.js');
+var StartBet = require('./StartBet.js');
 
 var App = React.createClass({
 
@@ -24,7 +25,7 @@ var App = React.createClass({
         activeComponent = <Feed />;
         break;
       case 'bet':
-        activeComponent = <h1>Betting</h1>;
+        activeComponent = <StartBet />;
         break;
       default:
         activeComponent = <Feed />
