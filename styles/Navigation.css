@@ -1,0 +1,11 @@
+#navigation div {
+  font-size: 2em;
+  text-align: center;
+  line-height: 4em;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+#navigation div:hover {
+  text-decoration: none;
+}

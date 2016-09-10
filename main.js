@@ -1,5 +1,5 @@
 var React = require('react');
 var ReactDOM = require('react-dom');
-var Feed = require('./Feed.js');
+var App = require('./App.js');
 
-ReactDOM.render(<Feed />, document.getElementById('app'));
+ReactDOM.render(<App />, document.getElementById('app'));

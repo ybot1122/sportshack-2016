@@ -1,5 +1,5 @@
 /**
-  
+  Top-level component for the bets feed
 **/
 var React = require('react');
 var FeedPost = require('./FeedPost.js');
