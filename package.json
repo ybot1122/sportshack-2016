@@ -15,5 +15,11 @@
   "bugs": {
     "url": "https://github.com/ybot1122/sportshack-2016/issues"
   },
-  "homepage": "https://github.com/ybot1122/sportshack-2016#readme"
+  "homepage": "https://github.com/ybot1122/sportshack-2016#readme",
+  "dependencies": {
+    "babel-preset-react": "^6.11.1",
+    "babelify": "^7.3.0",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
+  }
 }
