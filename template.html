@@ -5,10 +5,78 @@
     <meta name="viewport"
         content="width=device-width, height=device-height, initial-scale=1.0">
 
-    <link rel="stylesheet" type="text/css" href="./styles/base/normalize.css" />
-    <link rel="stylesheet" type="text/css" href="./styles/base/grid.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="./styles/grid.css" />
+
+    <style>
+
+      h1 {
+        text-align: center;
+      }
+
+      .feed-post {
+        text-align: center;
+      }
+
+      .feed-post img {
+        height: 150px;
+      }
+
+      .feed-post .personA, .feed-post .personB, .feed-post .betAction {
+        text-align: center;
+      }
+    </style>
+
 </head>
 
 <body>
-  <h1>Hello</h1>
+
+  <div class="container-fixed" style="width: 600px; margin: auto">
+  
+    <h1>Hello</h1>
+
+    <div id="navigation" class="row">
+
+    </div>
+
+    <div id="feed" class="container-fluid">
+
+      <div class="feed-post">
+        <div class="row">
+          <div class="col-xs-5 personA">
+            <img src="personA.jpeg" />
+          </div>
+          <div class="col-xs-2 betAction">
+            Bet
+          </div>
+          <div class="col-xs-5 personB">
+            <img src="personB.jpeg" />
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-12">
+            Kansas City Chiefs at Seattle Seahawks
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-3">
+            Russell Wilson
+          </div>
+          <div class="col-xs-6">
+            More Pass Completions Than
+          </div>
+          <div class="col-xs-3">
+            Alex Smith
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="row">
+
+    </div>
+
+  </div>
+
 </body>
