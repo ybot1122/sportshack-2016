@@ -18,6 +18,10 @@ h1 {
   margin: 0px;
 }
 
+.feed-post .betValue {
+  height: 150px;
+}
+
 .feed-post .betValue p {
   text-align: center;
   position: relative;
