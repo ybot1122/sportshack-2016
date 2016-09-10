@@ -1,3 +1,6 @@
+/**
+  This component represents a single feed posting that includes bet information
+**/
 var React = require('react');
 
 var FeedPost = React.createClass({
