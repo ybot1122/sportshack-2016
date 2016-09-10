@@ -5,6 +5,10 @@ var React = require('react');
 
 var FriendList = React.createClass({
 
+  propTypes: {
+    nextStep: React.PropTypes.func.isRequired
+  },
+
   getInitialState() {
     return {
       friends: [
@@ -22,15 +26,16 @@ var FriendList = React.createClass({
     var friends = this.state.friends;
     for (let i = 0; i < friends.length; i++) {
       var cname = (friends[i].ahead === true) ? 'ahead' : 'behind';
+      var clickCallback = () => this.props.nextStep(friends[i]);
       friendsDom.push(
-        <div className="row friend" key={i}>
+        <div className="row friend" onClick={clickCallback} key={i}>
           <div className="col-xs-3">
             <img src={"images/users/" + friends[i].name + ".jpg"} />
           </div>
-          <div className="col-xs-6">
+          <div className="col-xs-6 friendName">
             <p>{friends[i].name}</p>
           </div>
-          <div className="col-xs-3">
+          <div className="col-xs-3 friendPoints">
             <p className={cname}>{friends[i].differential} points</p>
           </div>
         </div>

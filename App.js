@@ -33,7 +33,7 @@ var App = React.createClass({
 
     return (
       <div>
-        <Navigation navCallback={this.changePage} />
+        <Navigation navCallback={this.changePage} currPage={this.state.page} />
         {activeComponent}
       </div>
     );
