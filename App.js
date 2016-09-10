@@ -2,12 +2,15 @@
   Top-level component which has a state that can be changed to determine the page to show
 **/
 var React = require('react');
-var Navigation = require('./Navigation.js');
-var Feed = require('./Feed.js');
-var StartBet = require('./StartBet.js');
+var Navigation = require('./components/Navigation.js');
+var Feed = require('./components/Feed.js');
+var StartBet = require('./components/StartBet.js');
 
 var App = React.createClass({
 
+  /**
+    page: feed | bet
+  */
   getInitialState() {
     return { page: 'feed' };
   },

@@ -29,13 +29,13 @@ var FriendList = React.createClass({
       var clickCallback = () => this.props.nextStep(friends[i]);
       friendsDom.push(
         <div className="row friend" onClick={clickCallback} key={i}>
-          <div className="col-xs-3">
+          <div className="col-xs-3" style={{paddingLeft: '0px'}}>
             <img src={"images/users/" + friends[i].name + ".jpg"} />
           </div>
           <div className="col-xs-6 friendName">
             <p>{friends[i].name}</p>
           </div>
-          <div className="col-xs-3 friendPoints">
+          <div className="col-xs-3 friendPoints" style={{paddingRight: '0px'}}>
             <p className={cname}>{friends[i].differential} points</p>
           </div>
         </div>
