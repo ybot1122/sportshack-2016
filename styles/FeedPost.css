@@ -1,0 +1,36 @@
+h1 {
+  text-align: center;
+}
+
+.feed-post {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.feed-post img {
+  max-height: 150px;
+  max-width: 100%;
+}
+
+.feed-post .bet-info {
+  font-size: 2em;
+  padding: 0px 10px 0px 10px;
+  margin: 0px;
+}
+
+.feed-post .betValue p {
+  text-align: center;
+  position: relative;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+.feed-post .bet-lineup {
+  font-size: 1.5em;
+}
+
+.feed-post .live-preview {
+
+}
