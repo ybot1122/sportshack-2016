@@ -34,7 +34,7 @@ var LiveGameListing = React.createClass({
         var games = response.games;
         var activeGameArray = [];
         for (var game in games) {
-          if (games[game].status == 'inprogress') {
+          if (games[game].status !== 'closed') {
             var home = Teams.find((el) => el.abr === games[game].home) || {};
             var away = Teams.find((el) => el.abr === games[game].away) || {};
 

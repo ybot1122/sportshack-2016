@@ -5,6 +5,7 @@ var React = require('react');
 var FriendList = require('./FriendList.js');
 var BetStepIndicator = require('./BetStepIndicator.js');
 var BetHistory = require('./BetHistory.js');
+var BetForm = require('./BetForm.js');
 var LiveGameListing = require('./LiveGameListing.js');
 
 var StartBet = React.createClass({
@@ -65,7 +66,7 @@ var StartBet = React.createClass({
         activeComponent = <LiveGameListing friend={this.state.friend.name} nextStep={this.nextStep(2)} />;
         break;
       case 3:
-        activeComponent = <h1>{this.state.game}</h1>;
+        activeComponent = <BetForm gameId={this.state.game} />;
         break;
       case 4:
         activeComponent = <BetHistory />;

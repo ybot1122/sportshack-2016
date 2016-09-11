@@ -92,3 +92,15 @@ body {
   text-align: center;
   font-size: 2em;
 }
+
+#bet-form select, #bet-form option {
+  text-align: center;
+  margin-left: 3px;
+  margin-right: 3px;
+  font-size: 2em;
+}
+
+#bet-form {
+  text-align: center;
+  font-size: 2em;
+}
