@@ -254,6 +254,7 @@ var Feed = React.createClass({
   render: function () {
     var betList = [];
     for (let i = 0; i < this.state.bets.length; i++) {
+      var win = this.state.bets[i].outcome ? this.state.bets[i].userA : this.state.bets[i].userB;
       betList.push(React.createElement(FeedPost, {
         userA: this.state.bets[i].userA,
         userB: this.state.bets[i].userB,
@@ -263,6 +264,7 @@ var Feed = React.createClass({
         statLine: this.state.bets[i].statLine,
         betValue: this.state.bets[i].betValue,
         ongoing: this.state.bets[i].ongoing,
+        winner: win,
         key: i }));
     }
     return React.createElement(
@@ -377,11 +379,6 @@ var FeedPost = React.createClass({
             "p",
             { className: "betValue" },
             this.props.subjectA
-          ),
-          React.createElement(
-            "p",
-            null,
-            "30 yards"
           )
         ),
         React.createElement(
@@ -391,11 +388,6 @@ var FeedPost = React.createClass({
             "p",
             { className: "betValue" },
             this.props.subjectB
-          ),
-          React.createElement(
-            "p",
-            null,
-            "15 yards"
           )
         ),
         React.createElement(

@@ -62,11 +62,9 @@ var FeedPost = React.createClass({
           </div>
           <div className="col-xs-3">
             <p className="betValue">{this.props.subjectA}</p>
-            <p>30 yards</p>
           </div>
           <div className="col-xs-3">
             <p className="betValue">{this.props.subjectB}</p>
-            <p>15 yards</p>
           </div>
           <div className="col-xs-3">
             <p className="betValue">{this.props.betValue} points</p>

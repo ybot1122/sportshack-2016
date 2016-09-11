@@ -60,6 +60,7 @@ var Feed = React.createClass({
   render: function() {
     var betList = [];
     for (let i = 0; i < this.state.bets.length; i++) {
+      var win = this.state.bets[i].outcome ? this.state.bets[i].userA : this.state.bets[i].userB;
       betList.push(
         <FeedPost
           userA={this.state.bets[i].userA}
@@ -70,6 +71,7 @@ var Feed = React.createClass({
           statLine={this.state.bets[i].statLine}
           betValue={this.state.bets[i].betValue}
           ongoing={this.state.bets[i].ongoing}
+          winner={win}
           key={i} />
       );
     }
