@@ -8,10 +8,8 @@
   max-height: 150px;
   max-width: 100%;
 }
-.friend p {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
+.friendPoints {
+  text-align: right;
 }
 .friend .ahead {
   color: green;

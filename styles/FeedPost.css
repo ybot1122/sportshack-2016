@@ -38,3 +38,29 @@ h1 {
 .feed-post .live-preview {
 
 }
+
+/**** history ***/
+#history-overview {
+  text-align: center;
+  font-size: 2em;
+  margin-bottom: 50px;
+}
+
+#history-overview img {
+  height: 150px;
+}
+
+#net-points {
+  margin: 0px;
+  padding: 0px;
+  line-height: 150px;
+}
+
+.ahead {
+  color: green;
+}
+
+.behind {
+  color: red;
+}
+

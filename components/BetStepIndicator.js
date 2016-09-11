@@ -32,7 +32,7 @@ var BetStepIndicator = React.createClass({
       if (this.props.currStep >= i) {
         cname += ' active';
       }
-      steps.push(<div className={cname}>{i}</div>);
+      steps.push(<div className={cname} key={i}>{i}</div>);
     }
 
     var lastStep = (this.props.currStep > 1) ? <a onClick={this.props.prevStep}>Go Back</a> : null;

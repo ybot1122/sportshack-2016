@@ -26,7 +26,7 @@ var FriendList = React.createClass({
     var friends = this.state.friends;
     for (let i = 0; i < friends.length; i++) {
       var cname = (friends[i].ahead === true) ? 'ahead' : 'behind';
-      var clickCallback = () => this.props.nextStep(friends[i]);
+      var clickCallback = () => this.props.nextStep({friend: friends[i]});
       friendsDom.push(
         <div className="row friend" onClick={clickCallback} key={i}>
           <div className="col-xs-3" style={{paddingLeft: '0px'}}>
@@ -35,7 +35,7 @@ var FriendList = React.createClass({
           <div className="col-xs-6 friendName">
             <p>{friends[i].name}</p>
           </div>
-          <div className="col-xs-3 friendPoints" style={{paddingRight: '0px'}}>
+          <div className="col-xs-3 friendPoints">
             <p className={cname}>{friends[i].differential} points</p>
           </div>
         </div>

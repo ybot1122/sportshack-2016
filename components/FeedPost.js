@@ -6,6 +6,7 @@ var React = require('react');
 var FeedPost = React.createClass({
 
   propTypes: {
+    noPic: React.PropTypes.bool,
     userA: React.PropTypes.string,
     userB: React.PropTypes.string,
     betValue: React.PropTypes.number,
@@ -18,10 +19,11 @@ var FeedPost = React.createClass({
   },
 
   render: function() {
-    var imageA = 'images/users/' + this.props.userA + '.jpg';
-    var imageB = 'images/users/' + this.props.userB + '.jpg';
-    return (
-      <div className="feed-post">
+    var image = null;
+    if (!this.props.noPic) {
+      var imageA = 'images/users/' + this.props.userA + '.jpg';
+      var imageB = 'images/users/' + this.props.userB + '.jpg';
+      image = (
         <div className="row">
           <div className="col-xs-4 personA">
             <img src={imageA} />
@@ -33,6 +35,12 @@ var FeedPost = React.createClass({
             <img src={imageB} />
           </div>
         </div>
+      );
+    }
+
+    return (
+      <div className="feed-post">
+        {image}
         <div className="row bet-lineup">
           <div className="col-xs-12">
             <p>{this.props.betDescription}</p>
