@@ -1,14 +1,56 @@
-#navigation div {
-  font-size: 2em;
-  text-align: center;
-  line-height: 4em;
-  text-decoration: underline;
-  cursor: pointer;
+body {
+  font-size: 12px;
 }
 
-#navigation div:hover {
-  text-decoration: none;
+#header {
+  font-family: 'Varela Round', sans-serif;
+  font-size: 3em;
+  margin-bottom: 20px;
 }
+
+#navigation {
+  margin-bottom: 20px;
+}
+
+#navigation div {
+  font-size: 1.5em;
+  text-align: center;
+  cursor: pointer;
+  height: 3em;
+  line-height: 3em;
+  text-decoration: underline;
+}
+
+#navigation div:first-child {
+}
+
+#navigation div:after {
+    position: absolute;
+    top: 0; left: 0; bottom: 0; right: 0;
+    content: "";
+    opacity: 1.0;
+
+    box-shadow: inset 0px 0px 75px 15px rgba(255, 255, 255, 0.8);
+}
+
+#navigation div:after {
+   transition: opacity .25s ease-in-out;
+}
+
+#navigation div:hover:after {
+    opacity: 0;
+}
+
+#navigation div.activeNav {
+  text-decoration: none;
+  cursor: default;
+  box-shadow: inset 0px 0px 75px 15px rgba(255, 255, 255, 0);
+}
+
+#navigation div.activeNav:after {
+  opacity: 0;
+}
+
 
 #bet-step-indicator {
   text-align: center;

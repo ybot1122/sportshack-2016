@@ -5,21 +5,30 @@ var React = require('react');
 
 var Navigation = React.createClass({
 
+  // feed | bet | leader | profile
+
   propTypes: {
     navCallback: React.PropTypes.func.isRequired,
     currPage: React.PropTypes.string.isRequired
   },
 
-  render: function() {
-    if (this.props.currPage === 'feed') {
-      return (<div id="navigation" className="row">
-        <div className="col-xs-12" onClick={this.props.navCallback('bet')}>Start A Bet</div>
-      </div>);
+  getClassName: function(linkTo) {
+    if (linkTo === this.props.currPage) {
+      return 'col-xs-3 activeNav';
     } else {
-      return (<div id="navigation" className="row">
-        <div className="col-xs-12" onClick={this.props.navCallback('feed')}>Back to Feed</div>
-      </div>);
+      return 'col-xs-3';
     }
+  },
+
+  render: function() {
+    return (
+      <div id="navigation" className="row">
+        <div className="col-xs-3" className={this.getClassName('bet')} onClick={this.props.navCallback('bet')}>Start A Bet</div>
+        <div className="col-xs-3" className={this.getClassName('leader')}>Leaderboard</div>
+        <div className="col-xs-3" className={this.getClassName('feed')}>Live Feed</div>
+        <div className="col-xs-3" className={this.getClassName('profile')}>Profile</div>
+      </div>
+    );
   }
 });
 
