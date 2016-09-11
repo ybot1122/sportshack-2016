@@ -13,13 +13,11 @@ var BetStepIndicator = React.createClass({
       case 1:
         return "Who do you want to challenge?";
       case 2:
-        return "";
+        return "Challenge a different friend";
       case 3:
-        return "Which game?";
+        return "Pick a different game";
       case 4:
-        return "Player, stats, and value";
-      case 5:
-        return "Confirmed!";
+        return "Reconfigure stat challenge";
       default:
         return "broke"      
     }
@@ -27,7 +25,7 @@ var BetStepIndicator = React.createClass({
 
   render: function() {
     var steps = [];
-    for (let i = 1; i <= 5; i++) {
+    for (let i = 1; i <= 4; i++) {
       var cname = 'step';
       if (this.props.currStep >= i) {
         cname += ' active';
@@ -35,12 +33,12 @@ var BetStepIndicator = React.createClass({
       steps.push(<div className={cname} key={i}>{i}</div>);
     }
 
-    var lastStep = (this.props.currStep > 1) ? <a onClick={this.props.prevStep} style={{cursor: 'pointer'}}>Go Back</a> : null;
+    var lastStep = (this.props.currStep > 1) ? <a onClick={this.props.prevStep} style={{cursor: 'pointer'}}>{this.getDirections()}</a> : null;
 
     return (
       <div id="bet-step-indicator">
         {steps}
-        <div className="instructions">{this.getDirections()} {lastStep}</div>
+        <div className="instructions">{lastStep}</div>
       </div>
     );
   }

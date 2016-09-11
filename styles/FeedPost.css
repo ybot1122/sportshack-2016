@@ -68,11 +68,11 @@ h1 {
   margin: 10px;
   text-align: center;
   cursor: pointer;
-  border: 1px black solid;
+  border: 1px white solid;
 }
 
 #history-overview .button:hover {
-  background: lightgreen;
+  background: #4d4d4d;
 }
 
 #net-points {
@@ -92,10 +92,26 @@ h1 {
 /** live game listing **/
 #live-game-list {
   text-align: left;
-  font-size: 2em;
 }
 
-#live-game-list div {
+#live-game-list img {
+  display: block;
+  margin: 0px auto 5px auto;
+  height: 150px;
+}
+
+#live-game-list .againstWho {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+#live-game-list .livegame {
   width: 80%;
-  margin: 0px auto 10px auto;
+  font-size: 2em;
+  margin: 0px auto 20px auto;
+  cursor: pointer;
+}
+
+#live-game-list .livegame:hover {
+  background: #4d4d4d;
 }

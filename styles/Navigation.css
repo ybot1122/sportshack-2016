@@ -4,6 +4,7 @@ body {
   color: white;
   background: url('../images/bg.jpg') repeat-x fixed;
   background-position: bottom center;
+  margin-bottom: 20px;
 }
 
 #header {

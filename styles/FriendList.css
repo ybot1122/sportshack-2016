@@ -1,5 +1,6 @@
 .friend {
   margin-bottom: 5px;
+  font-size: 3em;
 }
 .friendName, .friendPoints {
   position: relative;
@@ -18,5 +19,5 @@
   color: red;
 }
 .friend:hover {
-  background-color: silver;
+  background-color: #4d4d4d;
 }

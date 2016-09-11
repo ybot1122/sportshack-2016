@@ -11,11 +11,9 @@ var StartBet = React.createClass({
 
   /*
     Step 1: Select Friend
-    Step 2: View History
-      - state.friend (string) isRequired
-    Step 3: Select Game
-    Step 4: Enter Wizard
-    Step 5: Confirmation!
+    Step 2: pick game
+    Step 3: wizard
+    Step 4: Confirm
   */
 
   getInitialState() {
@@ -50,8 +48,8 @@ var StartBet = React.createClass({
         this.setState({ step: 2, friend: data.friend });
       }
     } else {
-      return () => {
-        this.setState({ step: currStep + 1 });
+      return (gameId) => {
+        this.setState({ step: currStep + 1, game: gameId, friend: this.state.friend });
       }
     }
   },
@@ -64,16 +62,13 @@ var StartBet = React.createClass({
         activeComponent = <FriendList nextStep={this.nextStep(1)} />;
         break;
       case 2:
-        activeComponent = <BetHistory prevStep={this.prevStep(this.state.step)} nextStep={this.nextStep(2)} personA="personA" personB={this.state.friend.name} />;
+        activeComponent = <LiveGameListing friend={this.state.friend.name} nextStep={this.nextStep(2)} />;
         break;
       case 3:
-        activeComponent = <LiveGameListing />;
+        activeComponent = <h1>{this.state.game}</h1>;
         break;
       case 4:
-        activeComponent = <h1>Bets Step 4</h1>;
-        break;
-      case 5:
-        activeComponent = <h1>Bets Step 5</h1>;
+        activeComponent = <BetHistory />;
         break;
       default:
         activeComponent = <h1>Bets Step 1</h1>;
