@@ -37,6 +37,14 @@ h1 {
   margin: 0px 0px 10px 0px;
 }
 
+.feed-post .ongoing {
+  color: red;
+}
+
+.feed-post .finished {
+  color: green;
+}
+
 /**** history ***/
 #history-overview {
   text-align: center;

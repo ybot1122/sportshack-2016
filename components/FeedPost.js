@@ -8,13 +8,15 @@ var FeedPost = React.createClass({
   propTypes: {
     noPic: React.PropTypes.bool,
 
-    userA: React.PropTypes.string,
-    userB: React.PropTypes.string,
-    subjectA: React.PropTypes.string,
-    subjectB: React.PropTypes.string,
-    comparator: React.PropTypes.string,
-    statLine: React.PropTypes.string,
-    betValue: React.PropTypes.number
+    userA: React.PropTypes.string.isRequired,
+    userB: React.PropTypes.string.isRequired,
+    subjectA: React.PropTypes.string.isRequired,
+    subjectB: React.PropTypes.string.isRequired,
+    comparator: React.PropTypes.string.isRequired,
+    statLine: React.PropTypes.string.isRequired,
+    betValue: React.PropTypes.number.isRequired,
+    ongoing: React.PropTypes.bool,
+    winner: React.PropTypes.string
   },
 
   descriptionGenerator: function() {
@@ -44,12 +46,19 @@ var FeedPost = React.createClass({
       );
     }
 
+    var inprog = (this.props.ongoing) ? <p className="ongoing">LIVE</p> : <p className="finished">FINAL</p>;
+
+    var betResult = "up for grabs";
+    if (!this.props.ongoing) {
+      betResult = "awarded to " + this.props.winner;
+    }
+
     return (
       <div className="feed-post">
         {image}
         <div className="row live-preview">
-          <div className="col-xs-3">
-            <p>???</p>
+          <div className="col-xs-3 betValue">
+            {inprog}
           </div>
           <div className="col-xs-3">
             <p className="betValue">{this.props.subjectA}</p>
@@ -61,7 +70,7 @@ var FeedPost = React.createClass({
           </div>
           <div className="col-xs-3">
             <p className="betValue">{this.props.betValue} points</p>
-            <p>up for grabs</p>
+            <p>{betResult}</p>
           </div>
         </div>
       </div>
