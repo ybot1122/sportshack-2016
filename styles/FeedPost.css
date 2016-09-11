@@ -4,11 +4,11 @@ h1 {
 
 .feed-post {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 100px;
 }
 
 .feed-post img {
-  max-height: 150px;
+  max-height: 50px;
   max-width: 100%;
 }
 
@@ -19,24 +19,20 @@ h1 {
 }
 
 .feed-post .betValue {
-  height: 150px;
+  font-size: 2em;
 }
 
 .feed-post .betValue p {
   text-align: center;
-  position: relative;
-  top: 50%;
-  -ms-transform: translateY(-50%);
-  -webkit-transform: translateY(-50%);
-  transform: translateY(-50%);
-}
-
-.feed-post .bet-lineup {
-  font-size: 1.5em;
 }
 
 .feed-post .live-preview {
+  margin-top: 20px;
+}
 
+.feed-post .live-preview p {
+  line-height: 1em;
+  margin: 0px 0px 10px 0px;
 }
 
 /**** history ***/

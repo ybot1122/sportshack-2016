@@ -25,14 +25,16 @@ var FeedPost = React.createClass({
       var imageB = 'images/users/' + this.props.userB + '.jpg';
       image = (
         <div className="row">
-          <div className="col-xs-4 personA">
+          <div className="col-xs-2 personA">
             <img src={imageA} />
+            <p>{this.props.userA}</p>
           </div>
-          <div className="col-xs-4 betValue">
-            <p className="bet-info">10 Points</p>
+          <div className="col-xs-8">
+            <p className="bet-info">{this.props.betDescription}</p>
           </div>
-          <div className="col-xs-4 personB">
+          <div className="col-xs-2 personB">
             <img src={imageB} />
+            <p>{this.props.userB}</p>
           </div>
         </div>
       );
@@ -41,15 +43,21 @@ var FeedPost = React.createClass({
     return (
       <div className="feed-post">
         {image}
-        <div className="row bet-lineup">
-          <div className="col-xs-12">
-            <p>{this.props.betDescription}</p>
-          </div>
-        </div>
         <div className="row live-preview">
-          <div className="col-xs-12">
-            <p>Dallas Cowboys @ Detroit Lions; Q1 12:50</p>
-            <p>Dez Bryant: 30 yds; Golden Tate: 15 yds</p>
+          <div className="col-xs-3">
+            <p>Dallas Cowboys vs Detroit Lions; Q1 12:50</p>
+          </div>
+          <div className="col-xs-3">
+            <p className="betValue">Dez Bryant</p>
+            <p>30 yards</p>
+          </div>
+          <div className="col-xs-3">
+            <p className="betValue">Golden Tate</p>
+            <p>15 yards</p>
+          </div>
+          <div className="col-xs-3">
+            <p className="betValue">20 points</p>
+            <p>up for grabs</p>
           </div>
         </div>
       </div>

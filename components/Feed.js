@@ -24,7 +24,13 @@ var Feed = React.createClass({
   render: function() {
     var betList = [];
     for (let i = 0; i < this.state.bets.length; i++) {
-      betList.push(<FeedPost userA={this.state.bets[i].userA} userB={this.state.bets[i].userB} key={i} />);
+      betList.push(
+        <FeedPost
+          userA={this.state.bets[i].userA}
+          userB={this.state.bets[i].userB}
+          betDescription="Aaron Rodgers throws more passes than Drew Brees by the 3rd quarter"
+          key={i} />
+      );
     }
     return (
       <div id="bet-feed">

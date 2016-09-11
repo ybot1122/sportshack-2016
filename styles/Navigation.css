@@ -1,15 +1,18 @@
 body {
   font-size: 12px;
+  color: white;
+  background: url('../images/bg.jpg') repeat-x fixed;
+  background-position: bottom center;
 }
 
 #header {
   font-family: 'Varela Round', sans-serif;
-  font-size: 3em;
+  font-size: 4em;
   margin-bottom: 20px;
 }
 
 #navigation {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
 }
 
 #navigation div {
@@ -21,16 +24,18 @@ body {
   text-decoration: underline;
 }
 
-#navigation div:first-child {
+#navigation div:hover {
+  text-decoration: none;
 }
 
+/**
 #navigation div:after {
     position: absolute;
     top: 0; left: 0; bottom: 0; right: 0;
     content: "";
     opacity: 1.0;
 
-    box-shadow: inset 0px 0px 75px 15px rgba(255, 255, 255, 0.8);
+    box-shadow: inset 0px 0px 75px 15px rgba(0, 0, 0, 0.8);
 }
 
 #navigation div:after {
@@ -40,17 +45,12 @@ body {
 #navigation div:hover:after {
     opacity: 0;
 }
+**/
 
 #navigation div.activeNav {
   text-decoration: none;
   cursor: default;
-  box-shadow: inset 0px 0px 75px 15px rgba(255, 255, 255, 0);
 }
-
-#navigation div.activeNav:after {
-  opacity: 0;
-}
-
 
 #bet-step-indicator {
   text-align: center;
