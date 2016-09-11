@@ -4,6 +4,7 @@ var placeBetButton = document.getElementById('place-bet-button');
 var signInButton = document.getElementById('sign-in-button');
 var signOutButton = document.getElementById('sign-out-button');
 var activeGameArray = []
+var userBets = []
 
 var authRef = firebase.auth();
 
@@ -37,6 +38,24 @@ function getActiveGames() {
         }
       }
     }
+  });
+}
+
+function getUserBets() {
+  var betsRef = firebase.database().ref('User-Bets/');
+  betsRef.on('value', function(snapshot) {
+    console.log(snapshot.key);
+    console.log(snapshot.val);
+    console.log(snapshot.child);
+    snapshot.forEach(function(childSnapshot) {
+      if (childSnapshot.key == firebase.auth().currentUser.uid) {
+        childSnapshot.forEach(function(child2Snapshot) {
+          var bet = []
+          
+          child2Snapshot.child('Opponent').val();
+        });
+      }
+    });
   });
 }
 
@@ -121,3 +140,4 @@ window.addEventListener('load', function() {
 signIn(email, password);
 getActiveGames();
 console.log(activeGameArray);
+getUserBets();
