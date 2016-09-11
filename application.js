@@ -94,18 +94,20 @@ function onAuthStateChanged() {
   });
 }
 
-function createBet(comp, cond1, cond2, time, isAccepted, isCompleted, opponentID, outcome, stat) {
+function createBet(betValue, comp, cond1, cond2, gameID, time, isAccepted, opponentID, opponentName, outcome, stat) {
   var userId = firebase.auth().currentUser.uid
 
   var betData = {
-    Comparator: comp
+    BetValue: betValue
+    , Comparator: comp
     , UserID: userId
+    , GameID: gameID
     , Condition1: cond1
     , Condition2: cond2
     , GameTime: time
     , IsAccepted: isAccepted
-    , IsCompleted: isCompleted
     , Opponent: opponentID
+    , OpponentName: opponentName
     , Outcome: outcome
     , Statistic: stat
   };
@@ -137,7 +139,7 @@ window.addEventListener('load', function() {
   // });
 
   placeBetButton.addEventListener("click", function() {
-    createBet("Russell", 1, 1, 1, 1, 1, 1, 1, 1);
+    createBet('PASS IN ALL PARAMETERS FROM THE FORM HERE');
   });
 
   // Listen for auth state changes
