@@ -5,11 +5,12 @@ var React = require('react');
 var Navigation = require('./components/Navigation.js');
 var Feed = require('./components/Feed.js');
 var StartBet = require('./components/StartBet.js');
+var Profile = require('./components/Profile.js');
 
 var App = React.createClass({
 
   /**
-    page: feed | bet
+    page: feed | bet | profile
   */
   getInitialState() {
     return { page: 'feed' };
@@ -30,8 +31,11 @@ var App = React.createClass({
       case 'bet':
         activeComponent = <StartBet />;
         break;
+      case 'profile':
+        activeComponent = <Profile />;
+        break;
       default:
-        activeComponent = <Feed />
+        activeComponent = <Feed />;
     }
 
     return (

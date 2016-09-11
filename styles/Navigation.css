@@ -81,3 +81,14 @@ body {
 #bet-step-indicator .step.active {
   background-color: green;
 }
+
+#profile img {
+  display: block;
+  margin: 0px auto 20px auto;
+  width: 300px;
+}
+
+#profile h2 {
+  text-align: center;
+  font-size: 2em;
+}

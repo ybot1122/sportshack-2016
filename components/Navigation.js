@@ -26,7 +26,7 @@ var Navigation = React.createClass({
         <div className="col-xs-3" className={this.getClassName('bet')} onClick={this.props.navCallback('bet')}>Start A Bet</div>
         <div className="col-xs-3" className={this.getClassName('leader')}>Leaderboard</div>
         <div className="col-xs-3" className={this.getClassName('feed')} onClick={this.props.navCallback('feed')}>Live Feed</div>
-        <div className="col-xs-3" className={this.getClassName('profile')}>Profile</div>
+        <div className="col-xs-3" className={this.getClassName('profile')} onClick={this.props.navCallback('profile')}>Profile</div>
       </div>
     );
   }
