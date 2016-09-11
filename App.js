@@ -40,7 +40,7 @@ var App = React.createClass({
 
     return (
       <div>
-        <h1 id="header">StatChallenge</h1>
+        <h1 id="header">TallyUp</h1>
         <Navigation navCallback={this.changePage} currPage={this.state.page} />
         {activeComponent}
       </div>

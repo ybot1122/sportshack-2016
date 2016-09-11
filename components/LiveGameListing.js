@@ -21,6 +21,9 @@ var LiveGameListing = React.createClass({
     this.getLiveGames();
   },
 
+
+
+
   getLiveGames: function() {
     var r = this;
     var data = $.ajax({
