@@ -2,6 +2,7 @@
   List of live games
 **/
 var React = require('react');
+var Teams = require('../constants/NFL_Teams.json');
 
 var LiveGameListing = React.createClass({
 
@@ -11,15 +12,36 @@ var LiveGameListing = React.createClass({
   },
 
   getInitialState() {
+    this.getLiveGames();
     return {
-      games: [
-        { home: 'Green Bay Packers', away: 'Minnesote Vikings', league: 'NFL', gid: 1 },
-        { home: 'San Diego Chargers', away: 'Tampa Bay Buccaneers', league: 'NFL', gid: 2 },
-        { home: 'Washington Redskins', away: 'Pittsburgh Steelers', league: 'NFL', gid: 3 },
-        { home: 'Kansas City Royals', away: 'Seattle Mariners', league: 'MLB', gid: 4 },
-        { home: 'Boston Red Sox', away: 'Cleveland Indians', league: 'MLB', gid: 5 },
-      ]
+      games: undefined
     };
+  },
+
+  getLiveGames: function() {
+    var r = this;
+    var data = $.ajax({
+      url: 'http://localhost:8000/nfl-t1/2016/REG/1/schedule.json?api_key=kkapenthwjg6gh22f9yb64v6', 
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {    
+        var games = response.games;
+        var activeGameArray = [];
+        for (var game in games) {
+          if (games[game].status == 'inprogress') {
+            var home = Teams.find((el) => el.abr === games[game].home) || {};
+            var away = Teams.find((el) => el.abr === games[game].away) || {};
+
+            activeGameArray.push({
+              gid: games[game].id,
+              home: home.city + " " + home.name,
+              away: away.city + " " + away.name
+            });
+          }
+        }
+        r.setState({games: activeGameArray});
+      }
+    });
   },
 
   generateNext: function(gameId) {
@@ -29,11 +51,17 @@ var LiveGameListing = React.createClass({
   render: function() {
     var gameList = [];
     var games = this.state.games;
-    for (let i = 0; i < games.length; i++) {
-      gameList.push(
-        <div className="livegame" onClick={this.generateNext(games[i].gid)}>{games[i].league}: {games[i].home} vs {games[i].away}</div>
-      );
+
+    if (!games) {
+      gameList.push(<img id="loader" src="./images/loader.gif" key="loader" />);
+    } else {
+      for (let i = 0; i < games.length; i++) {
+        gameList.push(
+          <div className="livegame" onClick={this.generateNext(games[i].gid)} key={i}>{games[i].home} vs {games[i].away}</div>
+        );
+      }
     }
+
     return (
       <div id="live-game-list">
         {gameList}
