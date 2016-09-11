@@ -44,16 +44,24 @@ function getActiveGames() {
 function getUserBets() {
   var betsRef = firebase.database().ref('User-Bets/');
   betsRef.on('value', function(snapshot) {
-    console.log(snapshot.key);
-    console.log(snapshot.val);
-    console.log(snapshot.child);
     snapshot.forEach(function(childSnapshot) {
       if (childSnapshot.key == firebase.auth().currentUser.uid) {
+        var bet = [];
         childSnapshot.forEach(function(child2Snapshot) {
-          var bet = []
-          
-          child2Snapshot.child('Opponent').val();
+          var betItem = [
+                        child2Snapshot.child('Opponent').val(), 
+                        child2Snapshot.child('Comparator').val(),
+                        child2Snapshot.child('Condition1').val(),
+                        child2Snapshot.child('Condition2').val(),
+                        child2Snapshot.child('GameTime').val(),
+                        child2Snapshot.child('IsAccepted').val(),
+                        child2Snapshot.child('IsCompleted').val(),
+                        child2Snapshot.child('Outcome').val(),
+                        child2Snapshot.child('Statistic').val()
+                        ];
+          bet.push(betItem);
         });
+        userBets.push(bet)
       }
     });
   });
@@ -141,3 +149,4 @@ signIn(email, password);
 getActiveGames();
 console.log(activeGameArray);
 getUserBets();
+console.log(userBets);
