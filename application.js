@@ -8,18 +8,19 @@ var authRef = firebase.auth();
 
 var email = 'joshuamielke@gmail.com';
 var password = 'seattlesportshackathon';
-signIn(email, password);
-getData();
 
 function getData() {
   var data = $.ajax({
-                url: 'http://api.sportradar.us/nfl-t1/2015/PST/1/SEA/MIN/pbp.json?api_key=kkapenthwjg6gh22f9yb64v6', 
-                type: "GET",   
-                dataType: 'json',
-                success: function(response){                      
-                  console.log(response);
-                }           
-            });
+      url: 'http://localhost:8000/nfl-t1/2015/PST/1/SEA/MIN/pbp.json?api_key=kkapenthwjg6gh22f9yb64v6', 
+      type: 'GET',
+      dataType: 'json',
+      success: function(response) {     
+        console.log(response);
+      },
+      complete: function() {
+        console.log('complete');
+      }
+  });
 }
 
 function createNewUser(email, password) {
@@ -108,3 +109,6 @@ window.addEventListener('load', function() {
   firebase.auth().onAuthStateChanged(onAuthStateChanged);
 
 }, false);
+
+signIn(email, password);
+getData();
