@@ -3,6 +3,7 @@
 **/
 var React = require('react');
 var FriendList = require('./FriendList.js');
+var BetStepIndicator = require('./BetStepIndicator.js');
 
 var StartBet = React.createClass({
 
@@ -21,7 +22,16 @@ var StartBet = React.createClass({
 
   // go back a step
   prevStep(currStep) {
-
+    if (currStep === 2) {
+      // picked a friend to initate bet
+      return (data) => {
+        this.setState({ step: 1 });
+      }
+    } else {
+      return () => {
+        this.setState({ step: currStep - 1 });
+      }
+    }
   },
 
   // callback to pass to child components to move to next step
@@ -61,7 +71,12 @@ var StartBet = React.createClass({
         activeComponent = <h1>Bets Step 1</h1>;
     }
 
-    return activeComponent;
+    return (
+      <div>
+        <BetStepIndicator currStep={this.state.step} prevStep={this.prevStep(this.state.step)} />
+        {activeComponent}
+      </div>
+    );
   }
 });
 
