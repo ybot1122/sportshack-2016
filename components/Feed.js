@@ -12,11 +12,11 @@ var Feed = React.createClass({
   getInitialState() {
     return {
       bets: [
-        { userA: 'personA', userB: 'personB' },
-        { userA: 'personA', userB: 'personC' },
-        { userA: 'personD', userB: 'personA' },
-        { userA: 'personA', userB: 'personB' },
-        { userA: 'personF', userB: 'personA' }
+        { userA: 'personA', userB: 'personB', subjectA: 'Sammy Watkins', subjectB: 'Steve Smith Sr', comparator: 'more', statLine: 'passing yards', betValue: 20 },
+        { userA: 'personA', userB: 'personC', subjectA: 'Marcus Mariota', subjectB: 'Teddy Bridgewater', comparator: 'more', statLine: 'touchdowns', betValue: 50  },
+        { userA: 'personD', userB: 'personA', subjectA: 'Danny Woodhead', subjectB: 'Charcandrick West', comparator: 'more', statLine: 'rushing yards', betValue: 100  },
+        { userA: 'personA', userB: 'personB', subjectA: 'Tampa Bay Buccaneers', subjectB: 'Atlanta Falcons', comparator: 'more', statLine: 'interceptions', betValue: 50  },
+        { userA: 'personF', userB: 'personA', subjectA: 'Terrelle Pryor', subjectB: 'Jordan Matthews', comparator: 'more', statLine: 'passing yards', betValue: 20  }
       ]
     }
   },
@@ -28,7 +28,11 @@ var Feed = React.createClass({
         <FeedPost
           userA={this.state.bets[i].userA}
           userB={this.state.bets[i].userB}
-          betDescription="Aaron Rodgers throws more passes than Drew Brees by the 3rd quarter"
+          subjectA={this.state.bets[i].subjectA}
+          subjectB={this.state.bets[i].subjectB}
+          comparator={this.state.bets[i].comparator}
+          statLine={this.state.bets[i].statLine}
+          betValue={this.state.bets[i].betValue}
           key={i} />
       );
     }

@@ -7,15 +7,19 @@ var FeedPost = React.createClass({
 
   propTypes: {
     noPic: React.PropTypes.bool,
+
     userA: React.PropTypes.string,
     userB: React.PropTypes.string,
-    betValue: React.PropTypes.number,
-    // userA bet userB etc etc
-    betDescription: React.PropTypes.string,
-    // which game is it related to
-    betGame: React.PropTypes.string,
-    // the stat in consideration
-    betStatline: React.PropTypes.string
+    subjectA: React.PropTypes.string,
+    subjectB: React.PropTypes.string,
+    comparator: React.PropTypes.string,
+    statLine: React.PropTypes.string,
+    betValue: React.PropTypes.number
+  },
+
+  descriptionGenerator: function() {
+    return this.props.subjectA + " will have " + this.props.comparator
+      + " " + this.props.statLine + " than " + this.props.subjectB;
   },
 
   render: function() {
@@ -30,7 +34,7 @@ var FeedPost = React.createClass({
             <p>{this.props.userA}</p>
           </div>
           <div className="col-xs-8">
-            <p className="bet-info">{this.props.betDescription}</p>
+            <p className="bet-info">{this.descriptionGenerator()}</p>
           </div>
           <div className="col-xs-2 personB">
             <img src={imageB} />
@@ -45,18 +49,18 @@ var FeedPost = React.createClass({
         {image}
         <div className="row live-preview">
           <div className="col-xs-3">
-            <p>Dallas Cowboys vs Detroit Lions; Q1 12:50</p>
+            <p>???</p>
           </div>
           <div className="col-xs-3">
-            <p className="betValue">Dez Bryant</p>
+            <p className="betValue">{this.props.subjectA}</p>
             <p>30 yards</p>
           </div>
           <div className="col-xs-3">
-            <p className="betValue">Golden Tate</p>
+            <p className="betValue">{this.props.subjectB}</p>
             <p>15 yards</p>
           </div>
           <div className="col-xs-3">
-            <p className="betValue">20 points</p>
+            <p className="betValue">{this.props.betValue} points</p>
             <p>up for grabs</p>
           </div>
         </div>
