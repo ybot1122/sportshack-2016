@@ -10,7 +10,6 @@ var Feed = React.createClass({
   },
 
   getInitialState() {
-    this.getUserBets();
     return {
       bets :[]
       /*
@@ -23,6 +22,10 @@ var Feed = React.createClass({
       ]
       */
     }
+  },
+
+  componentDidMount() {
+    this.getUserBets();
   },
 
   getUserBets() {

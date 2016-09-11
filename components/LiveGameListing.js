@@ -12,10 +12,13 @@ var LiveGameListing = React.createClass({
   },
 
   getInitialState() {
-    this.getLiveGames();
     return {
       games: undefined
     };
+  },
+
+  componentDidMount() {
+    this.getLiveGames();
   },
 
   getLiveGames: function() {

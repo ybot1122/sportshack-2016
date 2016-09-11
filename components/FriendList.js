@@ -2,6 +2,7 @@
   Flow to handle a bet creation
 **/
 var React = require('react');
+var Users = require('../constants/Users.json');
 
 var FriendList = React.createClass({
 
@@ -11,13 +12,7 @@ var FriendList = React.createClass({
 
   getInitialState() {
     return {
-      friends: [
-        { name: 'PersonB', differential: 20, ahead: true },
-        { name: 'PersonC', differential: 40, ahead: true },
-        { name: 'PersonD', differential: -10, ahead: false },
-        { name: 'PersonE', differential: 25, ahead: true },
-        { name: 'PersonF', differential: 0, ahead: false, hasNotBet: true }
-      ]
+      friends: Users
     };
   },
 
@@ -25,8 +20,12 @@ var FriendList = React.createClass({
     var friendsDom = [];
     var friends = this.state.friends;
     for (let i = 0; i < friends.length; i++) {
-      var cname = (friends[i].ahead === true) ? 'ahead' : 'behind';
+      if (friends[i].name === LOGGEDIN_USER) { continue; }
+      var cname = (friends[i].differential >= true) ? 'ahead' : 'behind';
       var clickCallback = () => this.props.nextStep({friend: friends[i]});
+
+      var diffOrStart = (friends[i].hasChallengedBefore) ? <p className={cname}>{friends[i].differential} points</p> : <p>--</p>;
+
       friendsDom.push(
         <div className="row friend" onClick={clickCallback} key={i}>
           <div className="col-xs-3" style={{paddingLeft: '0px'}}>
@@ -36,7 +35,7 @@ var FriendList = React.createClass({
             <p>{friends[i].name}</p>
           </div>
           <div className="col-xs-3 friendPoints">
-            <p className={cname}>{friends[i].differential} points</p>
+            {diffOrStart}
           </div>
         </div>
       );
