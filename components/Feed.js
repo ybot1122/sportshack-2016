@@ -10,7 +10,10 @@ var Feed = React.createClass({
   },
 
   getInitialState() {
+    this.getUserBets();
     return {
+      bets :[]
+      /*
       bets: [
         { userA: 'personA', userB: 'personB', subjectA: 'Sammy Watkins', subjectB: 'Steve Smith Sr', comparator: 'more', statLine: 'passing yards', betValue: 20, ongoing: true },
         { userA: 'personA', userB: 'personC', subjectA: 'Marcus Mariota', subjectB: 'Teddy Bridgewater', comparator: 'more', statLine: 'touchdowns', betValue: 50  },
@@ -18,7 +21,37 @@ var Feed = React.createClass({
         { userA: 'personA', userB: 'personB', subjectA: 'Tampa Bay Buccaneers', subjectB: 'Atlanta Falcons', comparator: 'more', statLine: 'interceptions', betValue: 50  },
         { userA: 'personF', userB: 'personA', subjectA: 'Terrelle Pryor', subjectB: 'Jordan Matthews', comparator: 'more', statLine: 'passing yards', betValue: 20  }
       ]
+      */
     }
+  },
+
+  getUserBets() {
+    var r = this;
+    var userBets = [];
+    var betsRef = firebase.database().ref('User-Bets/');
+    betsRef.on('value', function(snapshot) {
+      snapshot.forEach(function(childSnapshot) {
+        if (childSnapshot.key == firebase.auth().currentUser.uid) {
+          childSnapshot.forEach(function(child2Snapshot) {
+            var betItem = {
+              userA: LOGGEDIN_USER,
+              userB: child2Snapshot.child('OpponentName').val(),
+              comparator: child2Snapshot.child('Comparator').val(),
+              subjectA: child2Snapshot.child('Condition1').val(),
+              subjectB: child2Snapshot.child('Condition2').val(),
+              gameTime: child2Snapshot.child('GameTime').val(),
+              ongoing: child2Snapshot.child('IsCompleted').val() !== "True",
+              outcome: child2Snapshot.child('Outcome').val() === "True",
+              statLine: child2Snapshot.child('Statistic').val(),
+              betValue: child2Snapshot.child('BetValue').val()
+            };
+            console.log(betItem);
+            userBets.push(betItem);
+          });
+        }
+      });
+      r.setState({ bets: userBets });
+    });
   },
 
   render: function() {
