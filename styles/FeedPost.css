@@ -42,12 +42,31 @@ h1 {
 /**** history ***/
 #history-overview {
   text-align: center;
-  font-size: 2em;
   margin-bottom: 50px;
+}
+
+#history-overview p {
+  font-size: 2em;
+  margin-top: 0px;
 }
 
 #history-overview img {
   height: 150px;
+}
+
+#history-overview .button {
+  display: inline-block;
+  height: 100px;
+  width: 200px;
+  line-height: 100px;
+  margin: 10px;
+  text-align: center;
+  cursor: pointer;
+  border: 1px black solid;
+}
+
+#history-overview .button:hover {
+  background: lightgreen;
 }
 
 #net-points {
@@ -64,3 +83,13 @@ h1 {
   color: red;
 }
 
+/** live game listing **/
+#live-game-list {
+  text-align: left;
+  font-size: 2em;
+}
+
+#live-game-list div {
+  width: 80%;
+  margin: 0px auto 10px auto;
+}

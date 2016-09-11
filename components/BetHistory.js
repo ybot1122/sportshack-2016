@@ -8,7 +8,9 @@ var BetHistory = React.createClass({
 
   propTypes: {
     personA: React.PropTypes.string.isRequired,
-    personB: React.PropTypes.string.isRequired
+    personB: React.PropTypes.string.isRequired,
+    nextStep: React.PropTypes.func.isRequired,
+    prevStep: React.PropTypes.func.isRequired
   },
 
   getInitialState() {
@@ -30,17 +32,16 @@ var BetHistory = React.createClass({
     var imageA = 'images/users/' + this.props.personA + '.jpg';
     var imageB = 'images/users/' + this.props.personB + '.jpg';
     return (
-      <div>
-        <div id="history-overview" className="row">
-          <div className="col-xs-4">
-            <p>{this.props.personA}</p><img src={imageA} />
-          </div>
-          <div className="col-xs-4"><p>vs</p><p id="net-points" className="ahead">+50 points</p></div>
-          <div className="col-xs-4">
-            <p>{this.props.personB}</p><img src={imageB} />
-          </div>
+      <div id="history-overview" className="row">
+        <div className="col-xs-12">
+          <p>Start a StatChallenge against {this.props.personB}?</p>
         </div>
-        {betList}
+        <div onClick={this.props.nextStep} className="button">
+          <p>Let's Go</p>
+        </div>
+        <div className="button">
+          <p onClick={this.props.prevStep}>No</p>
+        </div>
       </div>
     );
   }

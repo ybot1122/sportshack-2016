@@ -5,6 +5,7 @@ var React = require('react');
 var FriendList = require('./FriendList.js');
 var BetStepIndicator = require('./BetStepIndicator.js');
 var BetHistory = require('./BetHistory.js');
+var LiveGameListing = require('./LiveGameListing.js');
 
 var StartBet = React.createClass({
 
@@ -26,8 +27,12 @@ var StartBet = React.createClass({
     window.scrollTo(0, 0);
     if (currStep === 2) {
       // picked a friend to initate bet
-      return (data) => {
+      return () => {
         this.setState({ step: 1 });
+      }
+    } else if (currStep === 3) {
+      return () => {
+        this.setState({ step: 2, friend: this.state.friend })
       }
     } else {
       return () => {
@@ -59,10 +64,10 @@ var StartBet = React.createClass({
         activeComponent = <FriendList nextStep={this.nextStep(1)} />;
         break;
       case 2:
-        activeComponent = <BetHistory personA="personA" personB={this.state.friend.name} />;
+        activeComponent = <BetHistory prevStep={this.prevStep(this.state.step)} nextStep={this.nextStep(2)} personA="personA" personB={this.state.friend.name} />;
         break;
       case 3:
-        activeComponent = <h1>Bets Step 3</h1>;
+        activeComponent = <LiveGameListing />;
         break;
       case 4:
         activeComponent = <h1>Bets Step 4</h1>;

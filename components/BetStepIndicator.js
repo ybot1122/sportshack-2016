@@ -13,7 +13,7 @@ var BetStepIndicator = React.createClass({
       case 1:
         return "Who do you want to challenge?";
       case 2:
-        return "History Page";
+        return "";
       case 3:
         return "Which game?";
       case 4:
@@ -35,7 +35,7 @@ var BetStepIndicator = React.createClass({
       steps.push(<div className={cname} key={i}>{i}</div>);
     }
 
-    var lastStep = (this.props.currStep > 1) ? <a onClick={this.props.prevStep}>Go Back</a> : null;
+    var lastStep = (this.props.currStep > 1) ? <a onClick={this.props.prevStep} style={{cursor: 'pointer'}}>Go Back</a> : null;
 
     return (
       <div id="bet-step-indicator">
