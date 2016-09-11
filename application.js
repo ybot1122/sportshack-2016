@@ -3,37 +3,46 @@
 var placeBetButton = document.getElementById('place-bet-button');
 var signInButton = document.getElementById('sign-in-button');
 var signOutButton = document.getElementById('sign-out-button');
+var activeGameArray = []
 
 var authRef = firebase.auth();
 
 var email = 'joshuamielke@gmail.com';
 var password = 'seattlesportshackathon';
-signIn(email, password);
-getData();
 
-function getData() {
+//function getData() {
+//   var data = $.ajax({
+//       url: 'http://localhost:8000/nfl-t1/2015/PST/1/SEA/MIN/pbp.json?api_key=kkapenthwjg6gh22f9yb64v6', 
+//       type: 'GET',
+//       dataType: 'json',
+//       success: function(response) {     
+//         console.log(response);
+//       },
+//       complete: function() {
+//         console.log('complete');
+//       }
+//   });
+// }// 
+
+function getActiveGames() {
   var data = $.ajax({
-                url: 'http://api.sportradar.us/nfl-t1/2015/PST/1/SEA/MIN/pbp.json?api_key=kkapenthwjg6gh22f9yb64v6', 
-                type: "GET",   
-                dataType: 'json',
-                success: function(response){                      
-                  console.log(response);
-                }           
-            });
+    url: 'http://localhost:8000/nfl-t1/2016/REG/1/schedule.json?api_key=kkapenthwjg6gh22f9yb64v6', 
+    type: 'GET',
+    dataType: 'json',
+    success: function(response) {    
+      var games = response.games;
+      for (var game in games) {
+        if (games[game].status == 'inprogress') {
+          activeGameArray.push(games[game].id);
+        }
+      }
+    }
+  });
 }
 
 function createNewUser(email, password) {
   //Also signs the User in
   authRef.createUserWithEmailAndPassword(email, password);
-  // Error Codes
-  // auth/email-already-in-use
-  // Thrown if there already exists an account with the given email address.
-  // auth/invalid-email
-  // Thrown if the email address is not valid.
-  // auth/operation-not-allowed
-  // Thrown if email/password accounts are not enabled. Enable email/password accounts in the Firebase Console, under the Auth tab.
-  // auth/weak-password
-  // Thrown if the password is not strong enough.
 }
 
 function signIn(email, password) {
@@ -108,3 +117,7 @@ window.addEventListener('load', function() {
   firebase.auth().onAuthStateChanged(onAuthStateChanged);
 
 }, false);
+
+signIn(email, password);
+getActiveGames();
+console.log(activeGameArray);
