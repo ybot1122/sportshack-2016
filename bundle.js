@@ -742,6 +742,7 @@ var LiveGameListing = React.createClass({
             var away = Teams.find(el => el.abr === games[game].away) || {};
 
             activeGameArray.push({
+              clickable: games[game].status === 'inprogress',
               gid: games[game].id,
               home: home.city + " " + home.name,
               away: away.city + " " + away.name
@@ -765,13 +766,23 @@ var LiveGameListing = React.createClass({
       gameList.push(React.createElement('img', { id: 'loader', src: './images/loader.gif', key: 'loader' }));
     } else {
       for (let i = 0; i < games.length; i++) {
-        gameList.push(React.createElement(
-          'div',
-          { className: 'livegame', onClick: this.generateNext(games[i].gid), key: i },
-          games[i].home,
-          ' vs ',
-          games[i].away
-        ));
+        if (games[i].clickable) {
+          gameList.push(React.createElement(
+            'div',
+            { className: 'livegame', onClick: this.generateNext(games[i].gid), key: i },
+            games[i].home,
+            ' vs ',
+            games[i].away
+          ));
+        } else {
+          gameList.push(React.createElement(
+            'div',
+            { className: 'livegame gameDisabled', key: i },
+            games[i].home,
+            ' vs ',
+            games[i].away
+          ));
+        }
       }
     }
 
@@ -804,9 +815,9 @@ var Navigation = React.createClass({
 
   getClassName: function (linkTo) {
     if (linkTo === this.props.currPage) {
-      return 'col-xs-3 activeNav';
+      return 'col-xs-4 activeNav';
     } else {
-      return 'col-xs-3';
+      return 'col-xs-4';
     }
   },
 
@@ -816,22 +827,17 @@ var Navigation = React.createClass({
       { id: 'navigation', className: 'row' },
       React.createElement(
         'div',
-        { className: 'col-xs-3', className: this.getClassName('bet'), onClick: this.props.navCallback('bet') },
+        { className: this.getClassName('bet'), onClick: this.props.navCallback('bet') },
         'Start A Bet'
       ),
       React.createElement(
         'div',
-        { className: 'col-xs-3', className: this.getClassName('leader') },
-        'Leaderboard'
-      ),
-      React.createElement(
-        'div',
-        { className: 'col-xs-3', className: this.getClassName('feed'), onClick: this.props.navCallback('feed') },
+        { className: this.getClassName('feed'), onClick: this.props.navCallback('feed') },
         'Live Feed'
       ),
       React.createElement(
         'div',
-        { className: 'col-xs-3', className: this.getClassName('profile'), onClick: this.props.navCallback('profile') },
+        { className: this.getClassName('profile'), onClick: this.props.navCallback('profile') },
         'Profile'
       )
     );

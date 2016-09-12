@@ -14,19 +14,18 @@ var Navigation = React.createClass({
 
   getClassName: function(linkTo) {
     if (linkTo === this.props.currPage) {
-      return 'col-xs-3 activeNav';
+      return 'col-xs-4 activeNav';
     } else {
-      return 'col-xs-3';
+      return 'col-xs-4';
     }
   },
 
   render: function() {
     return (
       <div id="navigation" className="row">
-        <div className="col-xs-3" className={this.getClassName('bet')} onClick={this.props.navCallback('bet')}>Start A Bet</div>
-        <div className="col-xs-3" className={this.getClassName('leader')}>Leaderboard</div>
-        <div className="col-xs-3" className={this.getClassName('feed')} onClick={this.props.navCallback('feed')}>Live Feed</div>
-        <div className="col-xs-3" className={this.getClassName('profile')} onClick={this.props.navCallback('profile')}>Profile</div>
+        <div className={this.getClassName('bet')} onClick={this.props.navCallback('bet')}>Start A Bet</div>
+        <div className={this.getClassName('feed')} onClick={this.props.navCallback('feed')}>Live Feed</div>
+        <div className={this.getClassName('profile')} onClick={this.props.navCallback('profile')}>Profile</div>
       </div>
     );
   }

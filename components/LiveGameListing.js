@@ -39,6 +39,7 @@ var LiveGameListing = React.createClass({
             var away = Teams.find((el) => el.abr === games[game].away) || {};
 
             activeGameArray.push({
+              clickable: games[game].status === 'inprogress',
               gid: games[game].id,
               home: home.city + " " + home.name,
               away: away.city + " " + away.name
@@ -62,9 +63,15 @@ var LiveGameListing = React.createClass({
       gameList.push(<img id="loader" src="./images/loader.gif" key="loader" />);
     } else {
       for (let i = 0; i < games.length; i++) {
-        gameList.push(
-          <div className="livegame" onClick={this.generateNext(games[i].gid)} key={i}>{games[i].home} vs {games[i].away}</div>
-        );
+        if (games[i].clickable) {
+          gameList.push(
+            <div className="livegame" onClick={this.generateNext(games[i].gid)} key={i}>{games[i].home} vs {games[i].away}</div>
+          );
+        } else {
+          gameList.push(
+            <div className="livegame gameDisabled" key={i}>{games[i].home} vs {games[i].away}</div>
+          );
+        }
       }
     }
 
