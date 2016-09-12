@@ -28,11 +28,15 @@ var Feed = React.createClass({
     this.getUserBets();
   },
 
+  componentWillUnmount() {
+
+  },
+
   getUserBets() {
     var r = this;
     var userBets = [];
     var betsRef = firebase.database().ref('User-Bets/');
-    betsRef.on('value', function(snapshot) {
+    betsRef.once('value', function(snapshot) {
       snapshot.forEach(function(childSnapshot) {
         if (childSnapshot.key == firebase.auth().currentUser.uid) {
           childSnapshot.forEach(function(child2Snapshot) {
@@ -53,6 +57,7 @@ var Feed = React.createClass({
           });
         }
       });
+      userBets.reverse();
       r.setState({ bets: userBets });
     });
   },

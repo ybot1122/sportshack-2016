@@ -32,7 +32,7 @@ var App = React.createClass({
         activeComponent = React.createElement(Feed, null);
         break;
       case 'bet':
-        activeComponent = React.createElement(StartBet, null);
+        activeComponent = React.createElement(StartBet, { navCallback: this.changePage });
         break;
       case 'profile':
         activeComponent = React.createElement(Profile, null);
@@ -70,7 +70,8 @@ var BetForm = React.createClass({
 
 
   propTypes: {
-    gameId: React.PropTypes.string.isRequired
+    gameId: React.PropTypes.string.isRequired,
+    enemyUser: React.PropTypes.string.isRequired
   },
 
   getInitialState() {
@@ -128,15 +129,58 @@ var BetForm = React.createClass({
     for (let i = 0; i < data.length; i++) {
       options.push(React.createElement(
         "option",
-        { key: i },
+        { value: data[i], key: i },
         data[i]
       ));
     }
     return options;
   },
 
-  render: function () {
+  createBet(betValue, comp, cond1, cond2, opponentName, stat) {
+    var userId = firebase.auth().currentUser.uid;
 
+    var betData = {
+      BetValue: betValue,
+      Comparator: comp,
+      UserID: userId,
+      GameID: 'dsafdasfsfd',
+      Condition1: cond1,
+      Condition2: cond2,
+      GameTime: 4,
+      IsAccepted: true,
+      Opponent: 'sdjas',
+      OpponentName: opponentName,
+      Outcome: false,
+      Statistic: stat,
+      IsCompleted: false
+    };
+
+    console.log(betData);
+
+    var newBetKey = firebase.database().ref().child('Bets').push().key;
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/Bets/' + newBetKey] = betData;
+    updates['/User-Bets/' + userId + '/' + newBetKey] = betData;
+
+    console.log("Attempting to update the firebase database...");
+
+    firebase.database().ref().update(updates);
+    this.setState({ isSubmitted: true });
+  },
+
+  submitAndGoToFeed() {
+    var Condition1 = $('#subjectA').val();
+    var Condition2 = $('#subjectB').val();
+    var Comparator = $('#comparator').val();
+    var Statistic = $('#statLine').val();
+    var OpponentName = this.props.enemyUser;
+    var IsCompleted = false;
+    this.createBet(50, Comparator, Condition1, Condition2, OpponentName, Statistic);
+  },
+
+  render: function () {
     if (this.state.team1Players.length === 0) {
       return React.createElement(
         "div",
@@ -145,47 +189,78 @@ var BetForm = React.createClass({
       );
     }
 
+    var button = this.state.isSubmitted ? React.createElement(
+      "div",
+      { id: "submitcomplete", style: { color: 'green' } },
+      "Submitted!"
+    ) : React.createElement(
+      "div",
+      { id: "submitbutton", onClick: this.submitAndGoToFeed },
+      "Submit Bet!"
+    );
+
     return React.createElement(
       "div",
       { id: "bet-form", className: "row" },
       "I bet that ",
       React.createElement(
         "select",
-        null,
+        { id: "subjectA" },
         this.renderPlayers('team1Players')
       ),
       " will have ",
       React.createElement(
         "select",
-        null,
+        { id: "comparator" },
         React.createElement(
           "option",
-          null,
+          { value: "More" },
           "more"
         ),
         React.createElement(
           "option",
-          null,
+          { value: "Less" },
           "less"
         )
       ),
       " ",
       React.createElement(
         "select",
-        null,
+        { id: "statLine" },
         React.createElement(
           "option",
-          null,
+          { value: "Rushing Yards" },
+          "rushing yards"
+        ),
+        React.createElement(
+          "option",
+          { value: "Passing Yards" },
           "passing yards"
+        ),
+        React.createElement(
+          "option",
+          { value: "Touchdowns" },
+          "touchdowns"
+        ),
+        React.createElement(
+          "option",
+          { value: "Points" },
+          "points"
+        ),
+        React.createElement(
+          "option",
+          { value: "Receiving Yards" },
+          "receiving yards"
         )
       ),
       " than ",
       React.createElement(
         "select",
-        null,
+        { id: "subjectB" },
         this.renderPlayers('team2Players')
       ),
-      "."
+      ".",
+      button
     );
   }
 });
@@ -291,7 +366,7 @@ var BetStepIndicator = React.createClass({
 
   render: function () {
     var steps = [];
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 3; i++) {
       var cname = 'step';
       if (this.props.currStep >= i) {
         cname += ' active';
@@ -357,11 +432,13 @@ var Feed = React.createClass({
     this.getUserBets();
   },
 
+  componentWillUnmount() {},
+
   getUserBets() {
     var r = this;
     var userBets = [];
     var betsRef = firebase.database().ref('User-Bets/');
-    betsRef.on('value', function (snapshot) {
+    betsRef.once('value', function (snapshot) {
       snapshot.forEach(function (childSnapshot) {
         if (childSnapshot.key == firebase.auth().currentUser.uid) {
           childSnapshot.forEach(function (child2Snapshot) {
@@ -382,6 +459,7 @@ var Feed = React.createClass({
           });
         }
       });
+      userBets.reverse();
       r.setState({ bets: userBets });
     });
   },
@@ -852,7 +930,7 @@ var StartBet = React.createClass({
 
   render: function () {
     var activeComponent = null;
-
+    console.log(this.state);
     switch (this.state.step) {
       case 1:
         activeComponent = React.createElement(FriendList, { nextStep: this.nextStep(1) });
@@ -861,7 +939,7 @@ var StartBet = React.createClass({
         activeComponent = React.createElement(LiveGameListing, { friend: this.state.friend.name, nextStep: this.nextStep(2) });
         break;
       case 3:
-        activeComponent = React.createElement(BetForm, { gameId: this.state.game });
+        activeComponent = React.createElement(BetForm, { gameId: this.state.game, enemyUser: this.state.friend.name });
         break;
       case 4:
         activeComponent = React.createElement(BetHistory, null);

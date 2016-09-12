@@ -25,7 +25,7 @@ var BetStepIndicator = React.createClass({
 
   render: function() {
     var steps = [];
-    for (let i = 1; i <= 4; i++) {
+    for (let i = 1; i <= 3; i++) {
       var cname = 'step';
       if (this.props.currStep >= i) {
         cname += ' active';

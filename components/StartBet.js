@@ -57,7 +57,7 @@ var StartBet = React.createClass({
 
   render: function() {
     var activeComponent = null;
-
+    console.log(this.state);
     switch(this.state.step) {
       case 1:
         activeComponent = <FriendList nextStep={this.nextStep(1)} />;
@@ -66,7 +66,7 @@ var StartBet = React.createClass({
         activeComponent = <LiveGameListing friend={this.state.friend.name} nextStep={this.nextStep(2)} />;
         break;
       case 3:
-        activeComponent = <BetForm gameId={this.state.game} />;
+        activeComponent = <BetForm gameId={this.state.game} enemyUser={this.state.friend.name} />;
         break;
       case 4:
         activeComponent = <BetHistory />;

@@ -29,7 +29,7 @@ var App = React.createClass({
         activeComponent = <Feed />;
         break;
       case 'bet':
-        activeComponent = <StartBet />;
+        activeComponent = <StartBet navCallback={this.changePage} />;
         break;
       case 'profile':
         activeComponent = <Profile />;

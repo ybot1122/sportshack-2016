@@ -9,6 +9,7 @@ var BetForm = React.createClass({
 
   propTypes: {
     gameId: React.PropTypes.string.isRequired,
+    enemyUser: React.PropTypes.string.isRequired
   },
 
   getInitialState() {
@@ -64,13 +65,56 @@ var BetForm = React.createClass({
     var data = this.state[team];
     var options = [];
     for (let i = 0; i < data.length; i++) {
-      options.push(<option key={i}>{data[i]}</option>);
+      options.push(<option value={data[i]} key={i}>{data[i]}</option>);
     }
     return options;
   },
 
-  render: function() {
+  createBet(betValue, comp, cond1, cond2, opponentName, stat) {
+    var userId = firebase.auth().currentUser.uid
 
+    var betData = {
+      BetValue: betValue
+      , Comparator: comp
+      , UserID: userId
+      , GameID: 'dsafdasfsfd'
+      , Condition1: cond1
+      , Condition2: cond2
+      , GameTime: 4
+      , IsAccepted: true
+      , Opponent: 'sdjas'
+      , OpponentName: opponentName
+      , Outcome: false
+      , Statistic: stat
+      , IsCompleted: false
+    };
+
+    console.log(betData);
+
+    var newBetKey = firebase.database().ref().child('Bets').push().key;
+
+    // Write the new post's data simultaneously in the posts list and the user's post list.
+    var updates = {};
+    updates['/Bets/' + newBetKey] = betData;
+    updates['/User-Bets/' + userId + '/' + newBetKey] = betData;
+
+    console.log("Attempting to update the firebase database...");
+
+    firebase.database().ref().update(updates);
+    this.setState({isSubmitted: true});
+  },
+
+  submitAndGoToFeed() {
+    var Condition1 = $('#subjectA').val();
+    var Condition2 = $('#subjectB').val();
+    var Comparator = $('#comparator').val();
+    var Statistic = $('#statLine').val();
+    var OpponentName = this.props.enemyUser;
+    var IsCompleted = false;
+    this.createBet(50, Comparator, Condition1, Condition2, OpponentName, Statistic);
+  },
+
+  render: function() {
     if (this.state.team1Players.length === 0) {
       return (
         <div id="bet-form" className="row">
@@ -79,9 +123,12 @@ var BetForm = React.createClass({
       );
     }
 
+    var button = (this.state.isSubmitted) ? <div id="submitcomplete" style={{color: 'green'}}>Submitted!</div> : <div id="submitbutton" onClick={this.submitAndGoToFeed}>Submit Bet!</div>;
+
     return (
       <div id="bet-form" className="row">
-        I bet that <select>{this.renderPlayers('team1Players')}</select> will have <select><option>more</option><option>less</option></select> <select><option>passing yards</option></select> than <select>{this.renderPlayers('team2Players')}</select>.
+        I bet that <select id="subjectA">{this.renderPlayers('team1Players')}</select> will have <select id="comparator"><option value="More">more</option><option value="Less">less</option></select> <select id="statLine"><option value="Rushing Yards">rushing yards</option><option value="Passing Yards">passing yards</option><option value="Touchdowns">touchdowns</option><option value="Points">points</option><option value="Receiving Yards">receiving yards</option></select> than <select id="subjectB">{this.renderPlayers('team2Players')}</select>.
+        {button}
       </div>
     );
   }
